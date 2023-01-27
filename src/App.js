@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import styles from "./App.module.css"
+import Cards from "./Components/Card/Cards"
+import { fetchData, fetchDailyData } from "./api"
+import Chart from "./Components/Chart/Chart"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    data: {},
+    // dailyData: {},
+  }
+
+  async componentDidMount() {
+    const fetchedData = await fetchData()
+    //const fetchedDailyData = await fetchDailyData()
+
+    this.setState({ data: fetchedData })
+  }
+
+  render() {
+    const { data } = this.state
+    //const { dailyData } = this.state
+
+    return (
+      <div className={styles.container}>
+        <Cards data={data} />
+        <Chart />
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
