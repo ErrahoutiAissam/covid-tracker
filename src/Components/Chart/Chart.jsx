@@ -5,8 +5,8 @@ import { Line, Bar } from "react-chartjs-2"
 const Chart = () => {
   const [dailyData, setDailyData] = useState({})
   const [date, setDate] = useState([])
-  const [erorr, setError] = useState("")
   const [loading, setLoading] = useState(true)
+  const [erorr, setError] = useState("")
 
   useEffect(() => {
     const fetchDailyApi = async () => {
