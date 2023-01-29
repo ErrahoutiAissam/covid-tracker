@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "./App.module.css"
 import Cards from "./Components/Card/Cards"
-import { fetchData, fetchDailyData } from "./api"
+import { fetchData } from "./api"
 import Chart from "./Components/Chart/Chart"
 
 class App extends React.Component {

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const globalURL = "https://disease.sh/v3/covid-19/all"
-const dailyUrl = "https://disease.sh/v3/covid-19/historical/all?lastdays=70"
+const dailyUrl = "https://disease.sh/v3/covid-19/historical/all?lastdays=100"
 
 export const fetchData = async () => {
   try {
