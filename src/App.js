@@ -26,10 +26,10 @@ class App extends React.Component {
       <div>
         <div className={styles.container}>
           <Cards data={data} />
-          <div className={styles.sideBar}>
+          <div className={styles.display}>
             <SideBar />
+            <Chart className={styles.chart} />
           </div>
-          <Chart />
         </div>
       </div>
     )

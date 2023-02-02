@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { fetchDailyData } from "../../api"
 import { Line, Bar, Pie } from "react-chartjs-2"
 import "chart.js/auto"
+import styles from "./Chart.module.css"
 
 const colors = {
   main: "#4c9aed",
@@ -84,8 +85,9 @@ const Chart = () => {
   //console.log(date.map((date) => new Date(date).toLocaleDateString()))
 
   return (
-    <div className='container'>
+    <div className={styles.container}>
       <Line style={{ width: "100%", height: "500px" }} data={data} />
+      <div></div>
     </div>
   )
 }
