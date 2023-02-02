@@ -10,6 +10,22 @@ import { ListItemButton } from "@mui/material"
 
 const SideBar = () => {
   const [countries, setCountries] = useState([])
+  const [searchInput, setSearchInput] = useState("")
+  const [filteredCountries, setFilteredCountries] = useState(countries)
+  const [selectedCountry, setSelctedCountry] = useState(null)
+
+  const handleSelectedCountry = (country) => {
+    setSelctedCountry(country)
+  }
+
+  const handleSearchInput = (inputValue) => {
+    setSearchInput(inputValue)
+    setFilteredCountries(
+      countries.filter((country) =>
+        country.toLowerCase().includes(inputValue.toLowerCase())
+      )
+    )
+  }
 
   useEffect(() => {
     const fetchedCountries = async () => {
@@ -24,15 +40,40 @@ const SideBar = () => {
     fetchedCountries()
   }, [])
 
+  console.log(selectedCountry)
+
   return (
     <div className={styles.container}>
-      <SearchBar />
+      <SearchBar onSearchInput={handleSearchInput} />
       <List component='nav' className={styles.sideBar}>
-        {countries.map((country, index) => (
-          <ListItem key={index} button={true} className={styles.sidebarList}>
-            <ListItemText primary={country} classes={styles.sidebarListItem} />
-          </ListItem>
-        ))}
+        {!searchInput
+          ? countries.map((country, index) => (
+              <ListItem
+                alignItems='center'
+                key={index}
+                button={true}
+                className={styles.sidebarList}
+              >
+                <ListItemText
+                  onClick={() => handleSelectedCountry(country)}
+                  primary={country}
+                  className={styles.sidebarListItem}
+                />
+              </ListItem>
+            ))
+          : filteredCountries.map((country, index) => (
+              <ListItem
+                key={index}
+                button={true}
+                className={styles.sidebarList}
+              >
+                <ListItemText
+                  onClick={() => handleSelectedCountry(country)}
+                  primary={country}
+                  className={styles.sidebarListItem}
+                />
+              </ListItem>
+            ))}
       </List>
     </div>
   )
