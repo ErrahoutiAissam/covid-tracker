@@ -2,6 +2,7 @@ import axios from "axios"
 
 const globalURL = "https://disease.sh/v3/covid-19/all"
 const dailyUrl = "https://disease.sh/v3/covid-19/historical/all?lastdays=100"
+const countriesUrl = "https://disease.sh/v3/covid-19/countries"
 
 export const fetchData = async () => {
   try {
@@ -29,5 +30,13 @@ export const fetchDailyData = async () => {
       deaths,
     }
     return fluidDailyData
+  } catch (error) {}
+}
+
+export const fetchCountries = async () => {
+  try {
+    const { data } = await axios.get(countriesUrl)
+    const arrayData = data.map((e) => e.country)
+    return arrayData
   } catch (error) {}
 }

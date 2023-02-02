@@ -42,14 +42,14 @@ const Chart = () => {
         label: "Deaths",
         borderColor: colors.red,
         fill: true,
-        yAxisID: "y-axis-1",
+        // yAxisID: "y-axis-1",
       },
       {
         data: casesValueArray,
         label: "Cases",
         borderColor: colors.main,
         fill: true,
-        yAxisID: "y-axis-2",
+        //yAxisID: "y-axis-2",
       },
     ],
   }
@@ -57,7 +57,6 @@ const Chart = () => {
     scales: {
       yAxes: [
         {
-          id: "y-axis-1",
           type: "linear",
           position: "left",
           ticks: {
@@ -68,7 +67,6 @@ const Chart = () => {
           },
         },
         {
-          id: "y-axis-2",
           type: "linear",
           position: "right",
           ticks: {
@@ -83,16 +81,11 @@ const Chart = () => {
   }
 
   //console.log(valueArray)
-
   //console.log(date.map((date) => new Date(date).toLocaleDateString()))
 
   return (
     <div className='container'>
-      <Line
-        style={{ width: "100%", height: "500px" }}
-        data={data}
-        options={options}
-      />
+      <Line style={{ width: "100%", height: "500px" }} data={data} />
     </div>
   )
 }

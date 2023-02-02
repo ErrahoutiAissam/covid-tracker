@@ -3,6 +3,7 @@ import styles from "./App.module.css"
 import Cards from "./Components/Card/Cards"
 import { fetchData } from "./api"
 import Chart from "./Components/Chart/Chart"
+import SideBar from "./Components/CountryPicker/SideBarCountries"
 
 class App extends React.Component {
   state = {
@@ -22,9 +23,14 @@ class App extends React.Component {
     //const { dailyData } = this.state
 
     return (
-      <div className={styles.container}>
-        <Cards data={data} />
-        <Chart />
+      <div>
+        <div className={styles.container}>
+          <Cards data={data} />
+          <div className={styles.sideBar}>
+            <SideBar />
+          </div>
+          <Chart />
+        </div>
       </div>
     )
   }
