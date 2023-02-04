@@ -8,15 +8,10 @@ import ListItem from "@mui/material/ListItem"
 import ListItemText from "@mui/material/ListItemText"
 import { ListItemButton } from "@mui/material"
 
-const SideBar = () => {
+const SideBar = ({ handleSelectedCountry }) => {
   const [countries, setCountries] = useState([])
   const [searchInput, setSearchInput] = useState("")
   const [filteredCountries, setFilteredCountries] = useState(countries)
-  const [selectedCountry, setSelctedCountry] = useState(null)
-
-  const handleSelectedCountry = (country) => {
-    setSelctedCountry(country)
-  }
 
   const handleSearchInput = (inputValue) => {
     setSearchInput(inputValue)
@@ -39,8 +34,6 @@ const SideBar = () => {
 
     fetchedCountries()
   }, [])
-
-  console.log(selectedCountry)
 
   return (
     <div className={styles.container}>

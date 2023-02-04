@@ -6,28 +6,30 @@ import TextField from "@mui/material/node/TextField/TextField"
 import styles from "./SearchBar.module.css"
 import { X } from "react-feather"
 
-const SearchBar = ({ onSearchInput, countryArray }) => {
-  const [value, setValue] = useState("")
+const SearchBar = ({ onSearchInput }) => {
+  const [inputValue, setInputValue] = useState("")
 
   const handleClick = (e) => {
+    setInputValue("")
+    onSearchInput("")
     e.preventDefault()
-    onSearchInput(value)
   }
 
   const handleSearch = (e) => {
-    setValue(e.target.value)
-    onSearchInput(value)
+    setInputValue(e.target.value)
+    onSearchInput(e.target.value)
   }
 
   return (
     <form className={styles.container}>
       <TextField
+        value={inputValue}
         id='search-bar'
         label='Enter a country name'
         variant='outlined'
         placeholder='Search...'
         size='small'
-        className={styles.TextField}
+        className={styles.textField}
         onChange={handleSearch}
       />
 
@@ -37,7 +39,8 @@ const SearchBar = ({ onSearchInput, countryArray }) => {
         style={{ margin: "0 20px 0 20px" }}
         onClick={handleClick}
       >
-        <FontAwesomeIcon icon={faSearch} />
+        {/* <FontAwesomeIcon icon={faSearch} /> */}
+        <X className={styles.textField} />
       </IconButton>
     </form>
   )

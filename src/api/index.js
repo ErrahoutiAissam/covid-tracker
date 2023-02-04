@@ -4,11 +4,17 @@ const globalURL = "https://disease.sh/v3/covid-19/all"
 const dailyUrl = "https://disease.sh/v3/covid-19/historical/all?lastdays=100"
 const countriesUrl = "https://disease.sh/v3/covid-19/countries"
 
-export const fetchData = async () => {
+export const fetchData = async (country) => {
+  let modifedURL = globalURL
+
+  if (country) {
+    modifedURL = `${countriesUrl}/${country}`
+  }
+
   try {
     const {
       data: { cases, deaths, recovered, active },
-    } = await axios.get(globalURL)
+    } = await axios.get(modifedURL)
 
     const fluidData = {
       cases,
@@ -39,4 +45,18 @@ export const fetchCountries = async () => {
     const arrayData = data.map((e) => e.country)
     return arrayData
   } catch (error) {}
+}
+
+export const fetchCountryData = async (country) => {
+  const {
+    data: { cases, deaths, recovered, active },
+  } = await axios.get(`${countriesUrl}/${country}`)
+
+  const fluidCountryData = {
+    cases,
+    deaths,
+    recovered,
+    active,
+  }
+  return fluidCountryData
 }

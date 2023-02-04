@@ -1,15 +1,15 @@
 .container {
   padding-bottom: 4%;
-  padding-top: -50px;
+  /* padding-top: -50px; */
   display: flex;
-  margin-right: 20px;
+  margin-right: 0px;
   width: 100%;
   align-content: space-between;
 }
 
 .textField {
-  padding-left: 20px;
-  border-radius: 4%;
-  border-style: solid;
-  box-shadow: 2em;
+  margin-left: 0px;
+  border-style: none;
+  /* border-style: solid; */
+  box-shadow: 5em;
 }
