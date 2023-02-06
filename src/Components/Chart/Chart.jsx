@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { fetchDailyData } from "../../api"
 import { Line, Bar } from "react-chartjs-2"
 import "chart.js/auto"
+import LoadingSpinner from "../Loader/Loader"
 import styles from "./Chart.module.css"
 
 const colors = {
@@ -10,28 +11,50 @@ const colors = {
   red: "#ef6960",
 }
 
-const Chart = ({ data: { cases, deaths, recovered, active }, country }) => {
+const Chart = ({
+  data: { cases, deaths, recovered, active },
+  country,
+  handleError,
+  handleLoading,
+}) => {
   const [dailyData, setDailyData] = useState({})
   const [date, setDate] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [errorMsg, setErrorMsg] = useState("")
   const [deathValueArray, setDeathValueArray] = useState([])
   const [casesValueArray, setCasesValueArray] = useState([])
 
   useEffect(() => {
     const fetchDailyApi = async () => {
       try {
+        handleLoading(true)
+        setLoading(true)
         const initialDailyData = await fetchDailyData()
-        setDailyData(initialDailyData)
-        setDate(initialDailyData ? Object.keys(initialDailyData.cases) : 0)
-        setDeathValueArray(Object.values(initialDailyData.cases))
-        setCasesValueArray(Object.values(initialDailyData.deaths))
-      } catch (error) {
-        setError(error)
+        handleLoading(false)
+        setLoading(true)
+        setDailyData(initialDailyData.fluidDailyData)
+        setError(initialDailyData.error)
+        setErrorMsg(initialDailyData.errorMsg)
+        handleError(initialDailyData.error, initialDailyData.errorMsg)
+        setDate(
+          initialDailyData.fluidDailyData
+            ? Object.keys(initialDailyData.fluidDailyData.cases)
+            : 0
+        )
+        setDeathValueArray(Object.values(initialDailyData.fluidDailyData.cases))
+        setCasesValueArray(
+          Object.values(initialDailyData.fluidDailyData.deaths)
+        )
+      } catch (e) {
+        //handleError(e, e.message)
+        setError(e)
+        setErrorMsg(e.message)
       } finally {
         setLoading(false)
       }
     }
+
     fetchDailyApi()
   }, [])
 
@@ -118,13 +141,13 @@ const Chart = ({ data: { cases, deaths, recovered, active }, country }) => {
   }
   */
 
-  console.log(country)
+  //console.log(country)
   //console.log(date.map((date) => new Date(date).toLocaleDateString()))
 
   return (
     <div className={styles.container}>
+      {loading && <LoadingSpinner />}
       {!country ? lineChart : barChart}
-      <div></div>
     </div>
   )
 }

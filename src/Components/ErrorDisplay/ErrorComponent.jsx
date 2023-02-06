@@ -7,7 +7,7 @@ const colors = {
   red: "#ef6960",
 }
 
-const Error = ({ msg }) => {
+const ErrorDisplay = ({ msg }) => {
   return (
     <div
       style={{
@@ -29,4 +29,4 @@ const Error = ({ msg }) => {
   )
 }
 
-export default Error
+export default ErrorDisplay

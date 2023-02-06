@@ -1,11 +1,13 @@
 import axios from "axios"
 
 const globalURL = "https://disease.sh/v3/covid-19/all"
-const dailyUrl = "https://disease.sh/v3/covid-19/historical/all?lastdays=100"
+const dailyUrl = "https://disease.sh/v3/covid-19/historical/all?lastdays=200"
 const countriesUrl = "https://disease.sh/v3/covid-19/countries"
 
 export const fetchData = async (country) => {
   let modifedURL = globalURL
+  let error = null
+  let errorMsg = ""
 
   if (country) {
     modifedURL = `${countriesUrl}/${country}`
@@ -16,27 +18,35 @@ export const fetchData = async (country) => {
       data: { cases, deaths, recovered, active },
     } = await axios.get(modifedURL)
 
-    const fluidData = {
+    var fluidData = {
       cases,
       deaths,
       recovered,
       active,
     }
-    return fluidData
-  } catch (error) {}
+  } catch (e) {
+    error = e
+    errorMsg = e.message
+  }
+  return { fluidData, error, errorMsg }
 }
 
 export const fetchDailyData = async () => {
+  let error = null
+  let errorMsg = ""
   try {
     const {
       data: { cases, deaths },
     } = await axios.get(dailyUrl)
-    const fluidDailyData = {
+    var fluidDailyData = {
       cases,
       deaths,
     }
-    return fluidDailyData
-  } catch (error) {}
+  } catch (e) {
+    error = e
+    errorMsg = e.message
+  }
+  return { fluidDailyData, error, errorMsg }
 }
 
 export const fetchCountries = async () => {
