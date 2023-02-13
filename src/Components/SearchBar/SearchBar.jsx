@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import IconButton from "@mui/material/IconButton"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
+// eslint-disable-next-line
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+//import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import TextField from "@mui/material/node/TextField/TextField"
 import styles from "./SearchBar.module.css"
 import { X } from "react-feather"
@@ -39,7 +40,6 @@ const SearchBar = ({ onSearchInput }) => {
         style={{ margin: "0 20px 0 20px" }}
         onClick={handleClick}
       >
-        {/* <FontAwesomeIcon icon={faSearch} /> */}
         <X className={styles.textField} />
       </IconButton>
     </form>

@@ -55,9 +55,6 @@ class App extends React.Component {
 
   render() {
     const { data, selectedCountry, error, errorMsg, isLoading } = this.state
-
-    console.log(isLoading)
-
     if (error) {
       return <ErrorDisplay msg={errorMsg} />
     }
